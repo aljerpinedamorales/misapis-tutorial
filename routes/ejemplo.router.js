@@ -1,20 +1,14 @@
 import { Router } from 'express';
 import { 
-    getAllEjemplos 
+    getAllEjemplos,
+    getEjemploproId
 } from '../controllers/ejemplo.controller.js';
 
 const ejemplo = Router();
 
 ejemplo.get('/', getAllEjemplos);
 
-ejemplo.get('/:id', (req, res) => {
-    const id = req.params.id;
-
-    res.json({
-        msg: 'get one API',
-        id
-    });
-});
+ejemplo.get('/:id', getEjemploproId);
 
 ejemplo.put('/:id', (req, res) => {
     const body = req.body;
@@ -24,6 +18,7 @@ ejemplo.put('/:id', (req, res) => {
         body
     });
 });
+
 ejemplo.post('/', (req, res) => {
     const body = req.body;
 

@@ -1,5 +1,6 @@
-import ejemplo from './ejemplo.routes.js';
 import { Router } from 'express';
+import ejemplo from './ejemplo.router.js';
+
 const indexRoutes = Router();
 
 indexRoutes.use('/ejemplo', ejemplo);
