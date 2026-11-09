@@ -9,6 +9,7 @@ export default class Server {
         this.app = express();
         this.port = process.env.PORT || 3000;
         this.generalRoute = '/api/';
+        this.app.use('/api/productos', require('../routes/producto.router.js'));
 
         // Middlewares
         this.middlewares();
