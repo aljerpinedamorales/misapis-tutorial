@@ -3,18 +3,18 @@ import cors from 'cors';
 import { dbConnection } from '../database/config.js';
 import * as db from '../db/cnn_mongodb.js';
 import indexRoutes from '../routes/index.router.js';
+import productoRoutes from '../routes/producto.router.js'; // 1. Importas arriba
 
 export default class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || 3000;
         this.generalRoute = '/api/';
-        this.app.use('/api/productos', require('../routes/producto.router.js'));
 
-        // Middlewares
+        // 1. Middlewares (primero se configuran para que procesen JSON y CORS)
         this.middlewares();
 
-        // Rutas de mi aplicación
+        // 2. Rutas de mi aplicación
         this.routes();
     }
 
@@ -36,8 +36,13 @@ export default class Server {
     }
 
     routes() {
-        // localhost:3000/api/ejemplo
+        // Rutas generales (ej: /api/)
         this.app.use(this.generalRoute, indexRoutes);
+
+        // 2. Usas la importación limpia aquí
+        this.app.use('/api/productos', productoRoutes);
+
+        // Ruta 404 para endpoints no encontrados
         this.app.use('**', (req, res) => {
             res.status(404).json({
                 msg: 'Ruta no encontrada'
