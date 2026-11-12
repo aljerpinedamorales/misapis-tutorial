@@ -1,38 +1,27 @@
 import { Router } from 'express';
 import { 
     getAllEjemplos,
-    getEjemploproId
+    getEjemploById,
+    postEjemplo,
+    updateEjemplo, // <--- Añadido
+    deleteEjemplo  // <--- Añadido
 } from '../controllers/ejemplo.controller.js';
 
 const ejemplo = Router();
 
+// Obtener todos
 ejemplo.get('/', getAllEjemplos);
 
-ejemplo.get('/:id', getEjemploproId);
+// Obtener por ID
+ejemplo.get('/:id', getEjemploById);
 
-ejemplo.put('/:id', (req, res) => {
-    const body = req.body;
+// Crear
+ejemplo.post('/', postEjemplo);
 
-    res.json({
-        msg: 'put API',
-        body
-    });
-});
+// Actualizar
+ejemplo.put('/:id', updateEjemplo);
 
-ejemplo.post('/', (req, res) => {
-    const body = req.body;
-
-    res.json({
-        msg: 'post API',
-        body
-    })
-});
-
-ejemplo.delete('/:id', (req, res) => {
-    const id = req.params.id;
-    res.json({
-        msg: 'delete API'
-    })
-});
+// Eliminar
+ejemplo.delete('/:id', deleteEjemplo);
 
 export default ejemplo;
